@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "name": "MiNombre",
+      "lastName":"MiApellido",
+      "email": "mimail@mail.com",
+      "password": "micontraseña"
+    }
+    
+  ]
+}

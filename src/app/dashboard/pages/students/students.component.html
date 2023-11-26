@@ -1,0 +1,13 @@
+<h1>Alumnos</h1>
+
+<div class="d-flex justify-content-end mb-3">
+  <button (click)="addCourse()" mat-flat-button style="color: #3F7E8C; background-color: #E0F2C4;">
+    Agregar Alumno
+  </button>
+</div>
+
+<app-students-table
+  [dataSource]="(courses$ | async) || []"
+  (deleteCourse)="onDeleteCourse($event)"
+  (editCourse)="onEditCourse($event)"
+></app-students-table>
