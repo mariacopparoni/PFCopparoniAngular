@@ -21,7 +21,6 @@ export class UsersComponent {
     private usersService: UsersService // MockUsersService // private usersBetterService: UsersBetterService
   ) {
     this.users$ = this.usersService.getUsers();
-    // console.log(this.usersBetterService.getUsersWithProduct());
   }
 
   addUser(): void {
@@ -40,24 +39,24 @@ export class UsersComponent {
   onEditUser(user: User): void {
     this.matDialog
       .open(UsersDialogComponent, {
-        data: user,
+        data: {user, edit: false}
       })
       .afterClosed()
       .subscribe({
         next: (v) => {
           if (!!v) {
             this.users$ = this.usersService.updateUser(user.id, v);
-            // CREANDO UNA COPIA DEL ARRAY ACTUAL
-            // const arrayNuevo = [...this.users];
-            // const indiceToEdit = arrayNuevo.findIndex((u) => u.id === user.id);
-            // arrayNuevo[indiceToEdit] = { ...arrayNuevo[indiceToEdit], ...v };
-            // this.users = [...arrayNuevo];
-            // this.users = this.users.map((u) =>
-            //   u.id === user.id ? { ...u, ...v } : u
-            // );
           }
         },
       });
+  }
+
+  onShowUser(user: User)
+  {
+    this.matDialog
+      .open(UsersDialogComponent, {
+        data: {user, edit: false},
+      })
   }
 
   onDeleteUser(userId: number): void {

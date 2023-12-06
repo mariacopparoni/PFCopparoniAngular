@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Student } from '../../models';
+import {User} from "../../../users/models";
 
 @Component({
   selector: 'app-students-table',
@@ -8,13 +8,17 @@ import { Student } from '../../models';
 })
 export class StudentsTableComponent {
   @Input()
-  dataSource: Student[] = [];
+  dataSource: User[] = [];
 
   @Output()
-  editCourse = new EventEmitter();
+  showStudent = new EventEmitter();
+
 
   @Output()
-  deleteCourse = new EventEmitter();
+  editStudent = new EventEmitter();
 
-  displayedColumns = ['id', 'name', 'startDate', 'endDate', 'actions'];
+  @Output()
+  deleteStudent = new EventEmitter();
+
+  displayedColumns = ['id', 'name',  'actions'];
 }

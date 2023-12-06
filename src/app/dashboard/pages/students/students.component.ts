@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { StudentsService } from './students.service';
 import { Observable } from 'rxjs';
-import { Student } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsDialogComponent } from './components/students-dialog/students-dialog.component';
+import { UsersService} from "../users/users.service";
+import { User} from "../users/models";
 
 @Component({
   selector: 'app-students',
@@ -11,50 +11,53 @@ import { StudentsDialogComponent } from './components/students-dialog/students-d
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent {
-  courses$: Observable<Student[]>;
+  students$: Observable<User[]>;
 
   constructor(
-    private studentsService: StudentsService,
+    private usersService: UsersService,
     private matDialog: MatDialog
   ) {
-    this.courses$ = this.studentsService.getStudents$();
+    this.students$ = this.usersService.getUsers(true);
   }
 
-  addCourse(): void {
+  addStudent(): void {
     this.matDialog
       .open(StudentsDialogComponent)
       .afterClosed()
       .subscribe({
         next: (result) => {
-          if (result) {
-            this.courses$ = this.studentsService.create$({
-              id: new Date().getTime(),
-              name: result.name,
-              lastName: result.lastName,
-              courseId: result.courseId,
-              startDate: result.startDate,
-            });
+          if (!!result) {
+            this.students$ = this.usersService.createUser(result, true);
           }
         },
       });
   }
 
-  onDeleteCourse(courseId: number): void {
-    this.courses$ = this.studentsService.delete$(courseId);
+  onDeleteStudent(userId: number): void {
+    if (confirm('Esta seguro?')) {
+      this.students$ = this.usersService.deleteUser(userId, true);
+    }
   }
 
-  onEditCourse(courseId: number): void {
+  onEditStudent(user: User): void {
     this.matDialog
       .open(StudentsDialogComponent, {
-        data: courseId,
+        data: {user, edit: true},
       })
       .afterClosed()
       .subscribe({
-        next: (result) => {
-          if (!!result) {
-            this.courses$ = this.studentsService.edit$(courseId, result);
+        next: (v) => {
+          if (!!v) {
+            this.students$ = this.usersService.updateUser(user.id, v, true);
           }
         },
+      });
+  }
+
+  onShowStudent(user: User): void {
+    this.matDialog
+      .open(StudentsDialogComponent, {
+        data: {user, edit: false},
       });
   }
 }

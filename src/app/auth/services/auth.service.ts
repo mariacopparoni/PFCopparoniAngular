@@ -25,7 +25,7 @@ export class AuthService {
   private handleAuthUser(authUser: User): void {
     // this._authUser$.next(authUser);
     this.store.dispatch(AuthActions.setAuthUser({ data: authUser }));
-    localStorage.setItem('token', authUser.token);
+    localStorage.setItem('id', authUser.id.toString());
   }
 
   login(payload: LoginPayload): void {
@@ -59,7 +59,7 @@ export class AuthService {
   verifyToken(): Observable<boolean> {
     return this.httpClient
       .get<User[]>(
-        `${environment.baseUrl}/users?token=${localStorage.getItem('token')}`
+        `${environment.baseUrl}/users?id=${localStorage.getItem('id')}`
       )
       .pipe(
         map((users) => {
@@ -78,7 +78,7 @@ export class AuthService {
     // this._authUser$.next(null);
     this.store.dispatch(AuthActions.resetState());
 
-    localStorage.removeItem('token');
+    localStorage.removeItem('id');
     this.router.navigate(['/auth/login']);
   }
 }

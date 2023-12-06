@@ -9,7 +9,7 @@ export class FormErrorsPipe implements PipeTransform {
     value: ValidationErrors | null | undefined,
     ...args: unknown[]
   ): unknown {
-    console.log(value);
+
     if (!value) return '';
 
     const errorMessages: string[] = [];

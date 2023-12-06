@@ -22,7 +22,6 @@ export class HeadlineDirective {
   // Cambiar el valor de la variable
   // Detectar los cambios especificamente en este input (fontWeight)
   set fontWeight(newValue: string) {
-    console.log('CAMBIO EL VALOR: ', newValue);
     this._fontWeight = newValue;
     this.render.setStyle(
       this.elementRef.nativeElement,
@@ -35,9 +34,4 @@ export class HeadlineDirective {
     this.render.setStyle(this.elementRef.nativeElement, 'font-size', '20px');
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log(changes);
-  //   this.fontWeight = changes['fontWeight']?.currentValue;
-  //   this.setFontWeight();
-  // }
 }

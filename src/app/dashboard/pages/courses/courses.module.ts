@@ -5,7 +5,6 @@ import { CoursesComponent } from './courses.component';
 import { CoursesTableComponent } from './components/courses-table/courses-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
-import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 import { RouterModule } from '@angular/router';
 import { CourseRoutingModule } from './courses-routing.module';
 
@@ -13,8 +12,7 @@ import { CourseRoutingModule } from './courses-routing.module';
   declarations: [
     CoursesComponent,
     CoursesTableComponent,
-    CoursesDialogComponent,
-    CourseDetailComponent,
+    CoursesDialogComponent
   ],
   imports: [CommonModule, SharedModule, CourseRoutingModule],
   providers: [

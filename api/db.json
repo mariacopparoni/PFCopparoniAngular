@@ -1,11 +1,100 @@
 {
+  "enrollments": [
+    {
+      "id": 2,
+      "course": "Francés",
+      "user": "usuario1@mail.com"
+    },
+    {
+      "course": "Italiano",
+      "user": "usuario1@mail.com",
+      "id": 3
+    },
+    {
+      "course": "Italiano",
+      "user": "maria.copparoni@gmail.com",
+      "id": 4
+    },
+    {
+      "course": "Portugués",
+      "user": "usuario1@mail.com",
+      "id": 5
+    },
+    {
+      "course": "Inglés",
+      "user": "usuario1@mail.com",
+      "id": 6
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Inglés",
+      "endDate": "2023-12-03T03:00:00.000Z",
+      "startDate": "2023-12-30T03:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Francés",
+      "endDate": "2023-12-03T03:00:00.000Z",
+      "startDate": "2023-12-30T03:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Italiano",
+      "endDate": "2023-12-03T03:00:00.000Z",
+      "startDate": "2023-12-30T03:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Alemán",
+      "endDate": "2023-12-03T03:00:00.000Z",
+      "startDate": "2023-12-30T03:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Portugués",
+      "endDate": "2023-12-03T03:00:00.000Z",
+      "startDate": "2023-12-30T03:00:00.000Z"
+    },
+    {
+      "name": "Ruso",
+      "startDate": "2023-12-03T03:00:00.000Z",
+      "endDate": "2023-12-30T03:00:00.000Z",
+      "id": 6
+    }
+  ],
   "users": [
     {
+      "id": 1,
       "name": "MiNombre",
-      "lastName":"MiApellido",
+      "lastName": "MiApellido",
       "email": "mimail@mail.com",
-      "password": "micontraseña"
+      "password": "1234",
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "name": "Usuario1",
+      "lastName": "Apellido1",
+      "email": "usuario1@mail.com",
+      "password": "1234",
+      "role": "STUDENT"
+    },
+    {
+      "id": 3,
+      "name": "Usuario2",
+      "lastName": "Apellido2",
+      "email": "usuario2@mail.com",
+      "password": "1234",
+      "role": "PROFESSIONAL"
+    },
+    {
+      "name": "FSDF",
+      "lastName": "ASDF",
+      "email": "maria.copparoni@gmail.com",
+      "role": "STUDENT",
+      "id": 4
     }
-    
   ]
 }

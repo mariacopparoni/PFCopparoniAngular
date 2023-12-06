@@ -7,11 +7,10 @@
 </div>
 
 <mat-nav-list>
-  <!-- /dashboard me llevara a /dashboard/home -->
   <mat-list-item routerLink="home">
     <a>Home</a>
   </mat-list-item>
-
+<div *ngIf="(role$ | async) === 'ADMIN'">
   <mat-list-item
     routerLink="users"
     routerLinkActive
@@ -20,6 +19,9 @@
   >
     <a>Usuarios</a>
   </mat-list-item>
+</div>
+
+
   <mat-list-item
     routerLink="courses"
     routerLinkActive

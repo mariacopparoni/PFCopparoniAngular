@@ -27,12 +27,7 @@ export class CoursesComponent {
       .subscribe({
         next: (result) => {
           if (result) {
-            this.courses$ = this.coursesService.createCourse$({
-              id: new Date().getTime(),
-              name: result.name,
-              endDate: result.endDate,
-              startDate: result.startDate,
-            });
+            this.courses$ = this.coursesService.createCourse$(result);
           }
         },
       });
@@ -42,18 +37,25 @@ export class CoursesComponent {
     this.courses$ = this.coursesService.deleteCourse$(courseId);
   }
 
-  onEditCourse(courseId: number): void {
+  onEditCourse(course: any): void {
     this.matDialog
       .open(CoursesDialogComponent, {
-        data: courseId,
+        data: {course, edit: true},
       })
       .afterClosed()
       .subscribe({
         next: (result) => {
           if (!!result) {
-            this.courses$ = this.coursesService.editCourse$(courseId, result);
+            this.courses$ = this.coursesService.editCourse$(course, result);
           }
         },
       });
   }
+  onShowCourse(course: any): void {
+    this.matDialog
+      .open(CoursesDialogComponent, {
+        data: {course, edit: false},
+      });
+  }
+
 }

@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { StudentsService } from '../../students.service';
+import {User} from "../../../users/models";
+import {UsersService} from "../../../users/users.service";
 
 @Component({
   selector: 'app-students-dialog',
@@ -9,42 +10,46 @@ import { StudentsService } from '../../students.service';
   styleUrls: ['./students-dialog.component.scss'],
 })
 export class StudentsDialogComponent {
-  nameControl = new FormControl();
-  startDateControl = new FormControl();
-  lastNameControl = new FormControl();
 
-  courseForm = new FormGroup({
-    name: this.nameControl,
-    startDate: this.startDateControl,
-    lastName: this.lastNameControl,
-  });
+  studentForm: FormGroup;
+  enrollments$: any[] | undefined
+
 
   constructor(
+    private fb: FormBuilder,
     private matDialogRef: MatDialogRef<StudentsDialogComponent>,
-    private studentsService: StudentsService,
-    @Inject(MAT_DIALOG_DATA) private courseId?: number
+    private usersService: UsersService,
+    @Inject(MAT_DIALOG_DATA) public data?: any
   ) {
-    if (courseId) {
-      this.studentsService.getById$(courseId).subscribe({
-        next: (c) => {
-          if (c) {
-            this.courseForm.patchValue(c);
-          }
-        },
-      });
+
+    this.studentForm = this.fb.group({
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      role: ['STUDENT'],
+    });
+    if (this.data){
+        this.studentForm.patchValue(this.data.user);
+        if (!this.data.edit) {
+          this.studentForm.disable();
+          usersService.getEnrollmentsByUser(this.data.user.email).subscribe({
+            next: (result) => {
+              if (result) {
+                this.enrollments$ = result;
+              }
+            }
+          });
+        }
     }
   }
 
-  public get isEditing(): boolean {
-    return !!this.courseId;
-  }
+
 
   onSubmit(): void {
-    if (this.courseForm.invalid) {
-      return this.courseForm.markAllAsTouched();
+    if (this.studentForm.invalid) {
+      return this.studentForm.markAllAsTouched();
     } else {
-      // logica para crear un curso
-      this.matDialogRef.close(this.courseForm.value);
+      this.matDialogRef.close(this.studentForm.value);
     }
   }
 }

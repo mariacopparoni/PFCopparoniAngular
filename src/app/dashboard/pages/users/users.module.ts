@@ -7,9 +7,7 @@ import { UsersDialogComponent } from './components/users-dialog/users-dialog.com
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { UsersService } from './users.service';
 import { UsersBetterService } from './users-better.service';
-import { MockUsersService } from './mock-users.service';
 import { ApiUrl } from 'src/app/config/url.token';
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { RouterModule } from '@angular/router';
 import { UsersRoutingModule } from './users-routing.module';
 
@@ -18,7 +16,6 @@ import { UsersRoutingModule } from './users-routing.module';
     UsersComponent,
     UsersDialogComponent,
     UsersTableComponent,
-    UserDetailComponent,
   ],
   imports: [CommonModule, SharedModule, UsersRoutingModule],
   exports: [UsersComponent],
@@ -39,7 +36,7 @@ import { UsersRoutingModule } from './users-routing.module';
     {
       provide: ApiUrl,
       useValue: {
-        url: 'http://localhost:34322/users',
+        url: 'http://localhost5920/users',
       },
     },
   ],

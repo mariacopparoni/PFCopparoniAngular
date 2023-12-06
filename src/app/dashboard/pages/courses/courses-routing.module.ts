@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CoursesComponent } from './courses.component';
-import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 
 @NgModule({
   imports: [
@@ -10,11 +9,6 @@ import { CourseDetailComponent } from './components/course-detail/course-detail.
         // /course
         path: '',
         component: CoursesComponent,
-      },
-      {
-        // /course/:id
-        path: ':id',
-        component: CourseDetailComponent,
       },
     ]),
   ],

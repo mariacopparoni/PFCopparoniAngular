@@ -3,13 +3,11 @@ import { User } from '../../users/models';
 
 export interface Enrollment {
   id: number;
-  courseId: number;
-  userId: number;
-  user?: User;
-  course?: Course;
+  user: string;
+  course: string;
 }
 
 export interface CreateEnrollmentPayload {
-  courseId: number | null;
-  userId: number | null;
+  course: number | null;
+  user: number | null;
 }

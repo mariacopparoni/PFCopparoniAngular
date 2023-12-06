@@ -8,3 +8,6 @@ export interface User {
   role: UserRole;
   password: string;
 }
+export interface Role{
+  name:string;
+}

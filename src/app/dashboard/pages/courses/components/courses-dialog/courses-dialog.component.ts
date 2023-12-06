@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoursesService } from '../../courses.service';
+import {Course} from "../../models";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-courses-dialog',
@@ -9,35 +11,39 @@ import { CoursesService } from '../../courses.service';
   styleUrls: ['./courses-dialog.component.scss'],
 })
 export class CoursesDialogComponent {
-  nameControl = new FormControl();
-  startDateControl = new FormControl();
-  endDateControl = new FormControl();
-
-  courseForm = new FormGroup({
-    name: this.nameControl,
-    startDate: this.startDateControl,
-    endDate: this.endDateControl,
-  });
+  courseForm : FormGroup;
+  enrollments$: any[] | undefined
 
   constructor(
     private matDialogRef: MatDialogRef<CoursesDialogComponent>,
     private coursesService: CoursesService,
-    @Inject(MAT_DIALOG_DATA) private courseId?: number
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data?: any
   ) {
-    if (courseId) {
-      this.coursesService.getCourseById$(courseId).subscribe({
-        next: (c) => {
-          if (c) {
-            this.courseForm.patchValue(c);
+    this.courseForm = this.fb.group({
+      name: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
+    });
+    if (this.data) {
+      this.courseForm.patchValue(this.data.course);
+      if (!this.data.edit)
+      {
+        this.courseForm.disable();
+      }
+      coursesService.getEnrollmentsByCourse(this.data.course.name).subscribe({
+        next: (result) => {
+          if (result) {
+            this.enrollments$ = result;
+
           }
-        },
+        }
       });
     }
+
   }
 
-  public get isEditing(): boolean {
-    return !!this.courseId;
-  }
+
 
   onSubmit(): void {
     if (this.courseForm.invalid) {

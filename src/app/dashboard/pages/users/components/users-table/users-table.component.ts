@@ -20,7 +20,10 @@ export class UsersTableComponent {
   @Output()
   editUser = new EventEmitter<User>();
 
-  displayedColumns = ['id', 'fullname', 'email', 'actions'];
+  @Output()
+  showUser = new EventEmitter<User>();
+
+  displayedColumns = ['id', 'fullname', 'email', 'role', 'actions'];
 
   userRole$: Observable<UserRole | undefined>;
 
@@ -30,24 +33,5 @@ export class UsersTableComponent {
       .pipe(map((u) => u?.role));
   }
 
-  goToDetail(userId: number): void {
-    // /dashboard/users/detail/2
-    this.router.navigate(
-      [
-        'dashboard',
-        'users',
-        'detail',
-        userId,
-        {
-          nombre: 'josue',
-          edad: 28,
-        },
-      ],
-      {
-        queryParams: {
-          search: 'hola mundo',
-        },
-      }
-    );
-  }
+
 }

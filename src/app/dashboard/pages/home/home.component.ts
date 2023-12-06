@@ -10,58 +10,21 @@ import {MatCardModule} from '@angular/material/card';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent  {
   loading = false;
 
-  clockSuscription: Subscription;
 
   constructor() {
     this.getUsers();
 
-    this.clockSuscription = this.getClock().subscribe({
-      // OK => then
-      next: (v) => {
-        console.log(v);
-      },
-      // ERROR => catch
-      error: (err) => {
-        alert('Ocurrio un error!');
-      },
-      // COMPLETA => finally
-      complete: () => {
-        console.log('FINALIZO EL CONTADOR');
-      },
-    });
 
-    this.getClock().subscribe({
-      next: (v) => {
-        console.log('SEGUNDA SUSCRIPCION');
-      },
-    });
+
+
   }
 
-  ngOnDestroy(): void {
-    console.log('SE DESTRUYO EL HOME');
 
-    this.clockSuscription.unsubscribe();
-  }
 
-  getClock(): Observable<number> {
-    return new Observable((suscriber) => {
-      let counter = 0;
 
-      setInterval(() => {
-        counter++;
-        suscriber.next(counter);
-
-        if (counter === 10) {
-          suscriber.complete();
-        }
-
-        // suscriber.error('error al mostrar la fecha');
-      }, 1000);
-    });
-  }
 
   async getUsers(): Promise<void> {
     this.loading = true;
@@ -84,6 +47,5 @@ export class HomeComponent implements OnDestroy {
         this.loading = false;
       });
 
-    console.log('Hola mundo');
   }
 }

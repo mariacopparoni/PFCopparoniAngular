@@ -24,6 +24,10 @@ export class SidebarComponent {
     return this.authUser$.pipe(map((user) => user?.email));
   }
 
+  get role$(): Observable<string | undefined> {
+    return this.authUser$.pipe(map((user) => user?.role));
+  }
+
   logout(): void {
     this.authService.logout();
   }

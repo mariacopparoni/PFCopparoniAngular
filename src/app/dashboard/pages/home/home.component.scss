@@ -1,0 +1,112 @@
+mat-card{
+  border-width: medium;
+  border-color: #3F7E8C;
+
+
+}
+.cardsHome {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(8,75px) ;
+  grid-template-rows: repeat(6,75px) ;
+  overflow: hidden;
+  border-width: medium;
+  border-color: #3F7E8C;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  .carda {
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    transition: all 1s;
+    height: 220px;
+    width: 145px;
+    margin: 5px;
+  }
+  .carda:hover {
+    transform: scale(1.05,1.05);
+  }
+
+  .cardb {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    transition: all 1s;
+    height: 220px;
+    width: 220px;
+    margin: 5px;
+  }
+  .cardb:hover {
+    transform: scale(1.05,1.05);
+  }
+
+  .cardc {
+    grid-column-start: 6;
+    grid-column-end: 8;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    transition: all 1s;
+    height: 295px;
+    width: 220px;
+    margin: 5px;
+  }
+  .cardc:hover {
+    transform: scale(1.05,1.05);
+  }
+
+  .cardd {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 6;
+    transition: all 1s;
+    height: 220px;
+    width: 220px;
+    margin: 5px;
+  }
+  .cardd:hover {
+    transform: scale(1.05,1.05);
+  }
+
+  .carde {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 6;
+    transition: all 1s;
+    height: 220px;
+    width: 145px;
+    margin: 5px;
+  }
+  .carde:hover {
+    transform: scale(1.05,1.05);
+  }
+
+  .cardf {
+    grid-column-start: 6;
+    grid-column-end: 8;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    transition: all 1s;
+    height: 145px;
+    width: 220px;
+    margin: 5px;
+  }
+  .cardf:hover {
+    transform: scale(1.05,1.05);
+  }
+}
+
+p{
+
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.buttona{
+
+}

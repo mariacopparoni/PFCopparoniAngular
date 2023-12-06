@@ -10,22 +10,37 @@ import { User } from '../../models';
 })
 export class UsersDialogComponent {
   userForm: FormGroup;
+  roles: any = [
+    {
+      name: 'ADMIN',
+    },
+    {
+      name: 'STUDENT'
+    },
+    {
+      name: 'PROFESSIONAL',
+    }
+];
 
   constructor(
     private fb: FormBuilder,
     private matDialogRef: MatDialogRef<UsersDialogComponent>,
 
     // RECIBO LA DATA
-    @Inject(MAT_DIALOG_DATA) public user?: User
+    @Inject(MAT_DIALOG_DATA) public data?: any
   ) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      role: ['', Validators.required],
     });
-
-    if (this.user) {
-      this.userForm.patchValue(this.user);
+    if (this.data) {
+      this.userForm.patchValue(this.data.user);
+      if (!this.data.edit)
+      {
+        this.userForm.disable();
+      }
     }
   }
 
